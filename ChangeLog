@@ -1,3 +1,11 @@
+Unreleased - se7enxweb/expcomponents-image-conversion
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Renamed: The package is se7enxweb/expcomponents-image-conversion, Exponential's
+  maintained fork of Zeta Components ImageConversion. It replaces zetacomponents/image-conversion,
+  so packages that require zetacomponents/image-conversion keep working. Class names
+  (ezc*) are unchanged.
+
 1.5.1 - Friday 04 October 2024
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

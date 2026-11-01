@@ -1,5 +1,5 @@
 {
-    "name": "zetacomponents/image-conversion",
+    "name": "se7enxweb/expcomponents-image-conversion",
     "type": "library",
     "authors": [
         {
@@ -39,11 +39,14 @@
         ]
     },
     "description": "A set of classes to apply different filters on images, such as colour changes, resizing and special effects.",
-    "homepage": "https://github.com/zetacomponents",
+    "homepage": "https://github.com/se7enxweb/expcomponents-image-conversion",
     "license": "Apache-2.0",
     "require": {
         "zetacomponents/base": "~1.8",
         "zetacomponents/image-analysis": "~1.1"
+    },
+    "replace": {
+        "zetacomponents/image-conversion": "self.version"
     },
     "require-dev": {
         "zetacomponents/unit-test": "@dev",
