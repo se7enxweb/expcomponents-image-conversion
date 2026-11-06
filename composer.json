@@ -42,8 +42,9 @@
     "homepage": "https://github.com/se7enxweb/expcomponents-image-conversion",
     "license": "Apache-2.0",
     "require": {
-        "zetacomponents/base": "~1.8",
-        "zetacomponents/image-analysis": "~1.1"
+        "php": ">=7.1",
+        "se7enxweb/expcomponents-base": "~1.8",
+        "se7enxweb/expcomponents-image-analysis": "~1.1"
     },
     "replace": {
         "zetacomponents/image-conversion": "self.version"
