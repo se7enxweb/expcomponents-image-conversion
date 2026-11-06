@@ -14,6 +14,14 @@ Unreleased - se7enxweb/expcomponents-image-conversion
 - Added: NOTICE keeps the upstream copyright notices and names the fork;
   README.md describes the fork.
 - Added: A GitHub Actions workflow running the test suite on PHP 7.4 to 8.5.
+- Includes upstream's change to run ImageMagick through the argument-list
+  form of proc_open(), so no shell parses the command (no shell injection).
+- Fixed: Since that change, scaling and cropping with ImageMagick failed with
+  "unrecognized option `-resize '": the filters pass '-resize ' and '-crop '
+  with a trailing blank, which the shell used to drop. addFilterOption()
+  trims the option name.
+- Fixed: The error message of a failed ImageMagick call shows the command
+  instead of "Array" and no longer raises "Array to string conversion".
 
 
 1.5.1 - Friday 04 October 2024
