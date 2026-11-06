@@ -22,6 +22,10 @@ Unreleased - se7enxweb/expcomponents-image-conversion
   trims the option name.
 - Fixed: The error message of a failed ImageMagick call shows the command
   instead of "Array" and no longer raises "Array to string conversion".
+- Fixed: ezcImageTransformation::transform() into a directory that does not
+  exist or is not writable throws ezcImageFileNotProcessableException at once.
+  It used to raise a tempnam() notice, write the temporary file into the
+  system's temporary directory, do all the work and only then fail.
 
 
 1.5.1 - Friday 04 October 2024

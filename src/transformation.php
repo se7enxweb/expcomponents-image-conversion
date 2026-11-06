@@ -207,8 +207,10 @@ class ezcImageTransformation
      *         the problem resulted from in it's public $parent attribute.
      * @throws ezcBaseFileNotFoundException If the file you are trying to 
      *         transform does not exists.
-     * @throws ezcBaseFilePermissionException If the file you are trying to 
+     * @throws ezcBaseFilePermissionException If the file you are trying to
      *         transform is not readable.
+     * @throws ezcImageFileNotProcessableException If the directory of the
+     *         file to save to does not exist or is not writable.
      */
     public function transform( $fileIn, $fileOut )
     {
@@ -222,8 +224,18 @@ class ezcImageTransformation
             throw new ezcBaseFilePermissionException( $fileIn, ezcBaseFileException::READ );
         }
         
+        // The temporary file is renamed to $fileOut at the end, which needs a
+        // writable directory. Without one, tempnam() would silently fall back
+        // to the system's temporary directory (with a notice) and the rename
+        // would fail after all the work was done.
+        $dirOut = dirname( $fileOut );
+        if ( !is_dir( $dirOut ) || !is_writable( $dirOut ) )
+        {
+            throw new ezcImageFileNotProcessableException( $fileOut, 'The directory of the file does not exist or is not writable.' );
+        }
+
         // Start atomic file operation
-        $fileTmp = tempnam( dirname( $fileOut ) . DIRECTORY_SEPARATOR, '.'. basename( $fileOut ) );
+        $fileTmp = tempnam( $dirOut . DIRECTORY_SEPARATOR, '.'. basename( $fileOut ) );
         copy( $fileIn, $fileTmp );
 
         try
