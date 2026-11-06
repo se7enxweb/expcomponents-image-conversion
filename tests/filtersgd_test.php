@@ -219,8 +219,10 @@ class ezcImageConversionFiltersGdTest extends ezcImageConversionTestCase
             imagesx( $this->getActiveResource() ),
             "Width of scaled image incorrect."
         );
+        // 150x113 scaled to a width of 50 is 37.67 high. The handler rounds
+        // since 1.5.0 (it truncated to 37 before), like SCALE_UP and SCALE_DOWN.
         $this->assertEquals(
-            37,
+            38,
             imagesy( $this->getActiveResource() ),
             "Width of scaled image incorrect."
         );

@@ -31,7 +31,7 @@
  * @version //autogentag//
  * @subpackage Tests
  */
-class ezcImageConversionTestCase extends ezcTestImageCase
+abstract class ezcImageConversionTestCase extends ezcTestImageCase
 {
     // To regenerate all test files, set this to true
     const REGENERATION_MODE = false;

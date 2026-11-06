@@ -128,12 +128,18 @@ class ezcImageConversionHandlerGdTest extends ezcImageConversionHandlerTest
     {
         $origPath = $this->testFiles['corrupt_jpeg'];
 
+        // GD refuses a JPEG with recoverable errors only when told to; the
+        // default of gd.jpeg_ignore_warning is 1 since PHP 7.1.
+        $ignoreWarning = ini_set( "gd.jpeg_ignore_warning", "0" );
+
         try
         {
             $ref = $this->handler->load( $origPath );
+            ini_set( "gd.jpeg_ignore_warning", $ignoreWarning );
             $this->fail( 'Exception not thrown on loading corrupt JPEG.' );
         }
         catch ( ezcImageFileNotProcessableException $e ) {}
+        ini_set( "gd.jpeg_ignore_warning", $ignoreWarning );
     }
 
     public function testLoadCorruptJpegSuccess()
