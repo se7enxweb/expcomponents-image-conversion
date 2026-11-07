@@ -90,9 +90,24 @@ class ezcImageGdBaseHandler extends ezcImageMethodcallHandler
         $this->checkFileName( $file );
         $ref = $this->loadCommon( $file, isset( $mime ) ? $mime : null );
         $loadFunction = $this->getLoadFunction( $this->getReferenceData( $ref, 'mime' ) );
+        if ( function_exists( 'error_clear_last' ) )
+        {
+            error_clear_last();
+        }
         if ( !ezcBaseFeatures::hasFunction( $loadFunction ) || ( $handle = @$loadFunction( $file ) ) === false )
         {
             throw new ezcImageFileNotProcessableException( $file, "File could not be opened using $loadFunction." );
+        }
+        // With gd.jpeg_ignore_warning off, PHP's bundled GD refuses a JPEG with
+        // a libjpeg "recoverable error", but an external libgd only warns and
+        // returns the image. Refuse it in both cases.
+        if ( $loadFunction === 'imagecreatefromjpeg' && !ini_get( 'gd.jpeg_ignore_warning' ) )
+        {
+            $error = error_get_last();
+            if ( $error !== null && strpos( $error['message'], 'gd-jpeg' ) !== false )
+            {
+                throw new ezcImageFileNotProcessableException( $file, "File could not be opened using $loadFunction: {$error['message']}" );
+            }
         }
         $this->setReferenceData( $ref, $handle, 'resource' );
         return $ref;
