@@ -226,7 +226,10 @@ class ezcImageGdBaseHandler extends ezcImageMethodcallHandler
         {
             throw new ezcImageFilterFailedException( 'crop', 'Resampling of image failed.' );
         }
-        imagedestroy( $oldResource );
+        if ( PHP_VERSION_ID < 80000 ) // a no-op since PHP 8.0, deprecated in 8.5
+        {
+            imagedestroy( $oldResource );
+        }
         $this->setReferenceData( $image, $newResource, 'resource' );
     }
 
@@ -245,7 +248,10 @@ class ezcImageGdBaseHandler extends ezcImageMethodcallHandler
         $res = $this->getReferenceData( $image, 'resource' );
         if ( is_resource( $res ) )
         {
-            imagedestroy( $res );
+            if ( PHP_VERSION_ID < 80000 ) // a no-op since PHP 8.0, deprecated in 8.5
+            {
+                imagedestroy( $res );
+            }
         }
         $this->closeCommon( $image );
     }

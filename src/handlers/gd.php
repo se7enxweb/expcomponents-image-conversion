@@ -693,7 +693,10 @@ class ezcImageGdHandler extends ezcImageGdBaseHandler
         );
 
         $this->setActiveResource( $newResource );
-        imagedestroy( $oldResource );
+        if ( PHP_VERSION_ID < 80000 ) // a no-op since PHP 8.0, deprecated in 8.5
+        {
+            imagedestroy( $oldResource );
+        }
     }
 
     // private
@@ -843,7 +846,10 @@ class ezcImageGdHandler extends ezcImageGdBaseHandler
     {
         $newResource = imagecreatetruecolor( $dimensions['x'], $dimensions['y'] );
         imagecopy( $newResource, $resource, 0, 0, 0, 0, $dimensions['x'], $dimensions['y'] );
-        imagedestroy( $resource );
+        if ( PHP_VERSION_ID < 80000 ) // a no-op since PHP 8.0, deprecated in 8.5
+        {
+            imagedestroy( $resource );
+        }
         return $newResource;
     }
 
@@ -926,7 +932,10 @@ class ezcImageGdHandler extends ezcImageGdBaseHandler
         {
             throw new ezcImageFilterFailedException( 'scale', 'Resampling of image failed.' );
         }
-        imagedestroy( $oldResource );
+        if ( PHP_VERSION_ID < 80000 ) // a no-op since PHP 8.0, deprecated in 8.5
+        {
+            imagedestroy( $oldResource );
+        }
         $this->setActiveResource( $newResource );
     }
 
@@ -973,7 +982,10 @@ class ezcImageGdHandler extends ezcImageGdBaseHandler
         {
             throw new ezcImageFilterFailedException( 'crop', 'Resampling of image failed.' );
         }
-        imagedestroy( $oldResource );
+        if ( PHP_VERSION_ID < 80000 ) // a no-op since PHP 8.0, deprecated in 8.5
+        {
+            imagedestroy( $oldResource );
+        }
         $this->setActiveResource( $newResource );
     }
 

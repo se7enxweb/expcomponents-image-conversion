@@ -26,6 +26,13 @@ Unreleased - se7enxweb/expcomponents-image-conversion
   exist or is not writable throws ezcImageFileNotProcessableException at once.
   It used to raise a tempnam() notice, write the temporary file into the
   system's temporary directory, do all the work and only then fail.
+- Fixed: With gd.jpeg_ignore_warning off, the GD handler refuses a JPEG that
+  libjpeg reports a recoverable error for with every GD build. PHP's bundled
+  GD refused it, while PHP built with an external libgd only warned and
+  loaded the damaged image.
+- Fixed: No deprecation notices on PHP 8.5: imagedestroy() is called only
+  before PHP 8.0 (it has had no effect since), and the $saveOptions parameter
+  of ezcImageTransformation::__construct() is explicitly nullable.
 
 
 1.5.1 - Friday 04 October 2024
