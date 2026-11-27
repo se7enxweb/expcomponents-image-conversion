@@ -2,7 +2,7 @@
 
 A set of classes to apply different filters on images, such as colour changes, resizing and special effects.
 
-This is the Exponential fork of [zetacomponents/ImageConversion](https://github.com/zetacomponents/ImageConversion),
+This is the Exponential Components fork of [zetacomponents/ImageConversion](https://github.com/zetacomponents/ImageConversion),
 maintained by 7x (se7en.x) and the Exponential Foundation for Exponential and anyone else
 who uses the Zeta Components ImageConversion component on current PHP versions. All credit for the
 component goes to the Zeta Components authors listed in `composer.json` and `CREDITS`;
